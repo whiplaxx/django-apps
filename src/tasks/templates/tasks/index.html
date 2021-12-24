@@ -1,0 +1,16 @@
+{% extends 'tasks/layout.html' %}
+
+{% block body %}
+    <h1> Tasks </h1>
+    
+    <h2> New task </h2>
+    <form action="{% url 'tasks:save' %}" method="post">
+        {% csrf_token %}
+        {{ newTaskForm }}
+        <input type="submit" value="Create">
+    </form>
+
+    <h2> Tasks </h2>
+    {% include "tasks/tasks.html" %}
+{% endblock %}
+

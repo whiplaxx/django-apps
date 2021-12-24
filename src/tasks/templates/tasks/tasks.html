@@ -1,0 +1,32 @@
+<ul>
+    {% for form in forms %}
+    <li id="{{ form.instance.id }}">
+        <form action="{% url 'tasks:save' %}" method="post">
+            {% csrf_token %}
+                
+            <input type="hidden" name="task_id" value="{{ form.instance.id }}">
+
+            {{ form.name_of_field.errors }}
+            {{ form.non_field_errors }}
+            
+            {{ form.description }}
+            
+            {{ form.dateLimit.label }}
+            {{ form.dateLimit }}
+            
+            {{ form.concluded.label }}
+            {{ form.concluded }}
+            
+            <input type="submit" value="Save">
+        </form>
+        <form action="{% url 'tasks:delete' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="task_id" value="{{ form.instance.id }}">
+            <input type="submit" value="Delete">
+        </form>
+    </li>
+
+    {% empty %}
+
+    {% endfor %}
+</ul>
