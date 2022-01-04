@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{user.username}} {% endblock %}
+
+{% block body %}
+    {{user.username}}
+    <br>
+    {{user.first_name}} {{user.last_name}}
+{% endblock %}

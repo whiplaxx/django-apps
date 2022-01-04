@@ -9,7 +9,7 @@ def index(request):
     newTaskForm = TaskForm()
     forms = []
 
-    tasks = Task.objects.filter()
+    tasks = Task.objects.all()
     for task in tasks:
         forms.append( EditTaskForm(instance=task) )
     return render(request, "tasks/index.html", {'newTaskForm': newTaskForm, 'forms': forms})
@@ -31,8 +31,7 @@ def saveTask(request):
 
         if form.is_valid():
             task = form.save()
-
-        scrollTo = f"#{task.id}"
+            scrollTo = f"#{task.id}"
     
     return HttpResponseRedirect( reverse('tasks:index') + scrollTo )
 
@@ -42,4 +41,8 @@ def deleteTask(request):
         task = get_object_or_404(Task, pk=task_id)
         task.delete()
     return HttpResponseRedirect( reverse('tasks:index') )
+
+def react(request):
+    tasks = Task.objects.all()
+    return render(request, "tasks/index_react.html", {'tasks': tasks})
 
